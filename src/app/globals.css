@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warm: #faf9f6;
+  --color-ivory: #f5f3ee;
+  --color-stone: #e9e6e0;
+  --color-line: #dcd8d0;
+  --color-charcoal: #22221f;
+  --color-ink: #161613;
+  --color-muted: #6b6a64;
+  --color-faint: #8f8d86;
+  --color-brass: #a98f5f;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+:root {
+  --background: #faf9f6;
+  --foreground: #161613;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visible keyboard focus states */
+:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@layer base {
+  ::selection {
+    background-color: var(--color-charcoal);
+    color: var(--color-warm);
+  }
+}
+
+/* Image reveal on scroll */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
+}
