@@ -102,7 +102,7 @@ export default function About() {
               <button
                 type="button"
                 onClick={openEnquiry}
-                className="group mt-8 inline-flex items-center gap-2 rounded-sm bg-[#25D366] px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
+                className="group mt-8 inline-flex items-center gap-2 rounded-sm bg-ink px-7 py-4 text-base font-semibold text-warm transition-colors hover:bg-charcoal"
               >
                 Get in touch
                 <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
