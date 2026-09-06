@@ -36,7 +36,7 @@ export default function MobileContactBar() {
           <button
             type="button"
             onClick={openEnquiry}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-line bg-white px-4 text-base font-semibold text-ink transition-colors hover:border-charcoal"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-[#25D366] px-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
           >
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
             WhatsApp

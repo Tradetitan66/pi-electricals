@@ -72,7 +72,7 @@ export default function Header() {
             <button
               type="button"
               onClick={openEnquiry}
-              className="rounded-sm bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-warm transition-colors hover:bg-charcoal focus-visible:outline-charcoal"
+              className="rounded-sm bg-[#25D366] px-6 py-3 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#1ebe5d] focus-visible:outline-charcoal"
             >
               Get a quote
             </button>
@@ -90,7 +90,7 @@ export default function Header() {
             <button
               type="button"
               onClick={openEnquiry}
-              className="rounded-sm bg-ink px-4 py-2.5 text-sm font-semibold text-warm transition-colors hover:bg-charcoal"
+              className="rounded-sm bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
             >
               Get a quote
             </button>

@@ -110,7 +110,7 @@ export default function Projects() {
           <button
             type="button"
             onClick={openEnquiry}
-            className="inline-flex items-center justify-center self-start rounded-sm bg-ink px-7 py-4 text-base font-semibold text-warm transition-colors hover:bg-charcoal"
+            className="inline-flex items-center justify-center self-start rounded-sm bg-[#25D366] px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
           >
             Start an enquiry
           </button>

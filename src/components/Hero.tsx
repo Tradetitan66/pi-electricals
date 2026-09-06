@@ -44,7 +44,7 @@ export default function Hero() {
           <button
             type="button"
             onClick={openEnquiry}
-            className="group inline-flex items-center justify-center gap-2 rounded-sm bg-warm px-7 py-4 text-base font-semibold text-ink transition-colors hover:bg-white"
+            className="group inline-flex items-center justify-center gap-2 rounded-sm bg-[#25D366] px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
           >
             Start an enquiry
             <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

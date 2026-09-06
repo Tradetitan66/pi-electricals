@@ -46,7 +46,7 @@ export default function FeaturedProject() {
           <button
             type="button"
             onClick={openEnquiry}
-            className="group mt-8 inline-flex items-center justify-center gap-2 rounded-sm border border-warm/40 bg-ink/20 px-7 py-4 text-base font-semibold text-warm backdrop-blur-sm transition-colors hover:border-warm/70 hover:bg-ink/40"
+            className="group mt-8 inline-flex items-center justify-center gap-2 rounded-sm bg-[#25D366] px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
           >
             Start an enquiry
             <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
