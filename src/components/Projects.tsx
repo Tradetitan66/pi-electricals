@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { useEnquiry } from "@/components/EnquiryProvider";
 import { PROJECTS } from "@/lib/constants";
@@ -11,7 +11,9 @@ type Project = (typeof PROJECTS)[number];
 
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const [paused, setPaused] = useState(false);
   const { openEnquiry } = useEnquiry();
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!selected) return;
@@ -28,10 +30,28 @@ export default function Projects() {
 
   const openLightbox = useCallback((p: Project) => setSelected(p), []);
 
-  // Assign layout classes based on the project's declared size.
-  // "large" fills two grid rows (editorial feature), "detail" renders as a
-  // compact square tile, everything else is a standard portrait tile.
-  const layoutFor = (project: Project) => project.size;
+  const scrollByCard = useCallback((dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-carousel-card]");
+    const width = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollTo({ left: el.scrollLeft + dir * width, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollTo({ left: el.scrollLeft + el.clientWidth * 0.95, behavior: "smooth" });
+      }
+    }, 2000);
+    return () => clearInterval(id);
+  }, [paused]);
 
   return (
     <section id="projects" className="border-b border-line bg-ivory">
@@ -51,33 +71,30 @@ export default function Projects() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {PROJECTS.map((project, index) => {
-            const layout = layoutFor(project);
-            const isTall = layout === "large";
-            const isDetail = layout === "detail";
-            return (
+        <div
+          className="group/carousel relative mt-10 sm:mt-14"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {PROJECTS.map((project, index) => (
               <Reveal
                 key={project.image}
                 as="figure"
-                className={isTall ? "sm:row-span-2" : ""}
+                className="w-[78vw] max-w-md shrink-0 snap-start sm:w-[46vw] sm:max-w-lg lg:w-[calc((100%-2rem)/3)]"
                 delay={(index % 4) * 60}
               >
                 <button
                   type="button"
                   onClick={() => openLightbox(project)}
-                  className="group relative block h-full w-full overflow-hidden rounded-[2px] bg-stone text-left focus-visible:outline-charcoal"
+                  data-carousel-card
+                  className="group block w-full rounded-3xl bg-stone text-left focus-visible:outline-charcoal"
                   aria-label={`View ${project.label} photograph`}
                 >
-                  <div
-                    className={`relative w-full overflow-hidden ${
-                      isTall
-                        ? "aspect-[3/4] sm:h-full sm:aspect-auto"
-                        : isDetail
-                          ? "aspect-square"
-                          : "aspect-[4/5]"
-                    }`}
-                  >
+                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
                     <Image
                       src={project.image}
                       alt={project.alt}
@@ -102,8 +119,25 @@ export default function Projects() {
                   </figcaption>
                 </button>
               </Reveal>
-            );
-          })}
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            className="absolute left-0 top-[40%] z-10 hidden h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-warm text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-white lg:inline-flex"
+            aria-label="Previous projects"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            className="absolute right-0 top-[40%] z-10 hidden h-12 w-12 translate-x-1/2 items-center justify-center rounded-full bg-warm text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-white lg:inline-flex"
+            aria-label="Next projects"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
         </div>
 
         <Reveal className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
