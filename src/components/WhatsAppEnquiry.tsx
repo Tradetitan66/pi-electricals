@@ -21,6 +21,13 @@ const INITIAL: FormData = {
   description: "",
 };
 
+const fieldClass = (invalid: boolean) =>
+  `mt-2 w-full rounded-sm px-4 py-3 text-base text-ink placeholder:text-faint focus:outline-none focus:ring-1 ${
+    invalid
+      ? "border border-[#a33] bg-red-50 focus:border-[#a33] focus:ring-[#a33]"
+      : "border border-line bg-white focus:border-charcoal focus:ring-charcoal"
+  }`;
+
 export default function WhatsAppEnquiry() {
   const { isOpen, closeEnquiry } = useEnquiry();
   const [data, setData] = useState<FormData>(INITIAL);
@@ -125,7 +132,7 @@ export default function WhatsAppEnquiry() {
               autoComplete="name"
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? "enq-name-err" : undefined}
-              className="mt-2 w-full rounded-sm border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-faint focus:border-charcoal focus:outline-none focus:ring-1 focus:ring-charcoal"
+              className={fieldClass(!!errors.name)}
             />
             {errors.name && (
               <p id="enq-name-err" role="alert" className="mt-2 text-sm text-[#a33]">
@@ -150,7 +157,7 @@ export default function WhatsAppEnquiry() {
               autoComplete="postal-code"
               aria-invalid={!!errors.location}
               aria-describedby={errors.location ? "enq-location-err" : undefined}
-              className="mt-2 w-full rounded-sm border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-faint focus:border-charcoal focus:outline-none focus:ring-1 focus:ring-charcoal"
+              className={fieldClass(!!errors.location)}
             />
             {errors.location && (
               <p id="enq-location-err" role="alert" className="mt-2 text-sm text-[#a33]">
@@ -164,7 +171,9 @@ export default function WhatsAppEnquiry() {
               What do you need help with?
             </span>
             <div
-              className="mt-2 grid grid-cols-2 gap-2"
+              className={`mt-2 grid grid-cols-2 gap-2 rounded-sm ${
+                errors.service ? "ring-2 ring-[#a33]" : ""
+              }`}
               role="group"
               aria-label="Type of work"
             >
@@ -211,7 +220,7 @@ export default function WhatsAppEnquiry() {
               aria-describedby={
                 errors.description ? "enq-description-err" : undefined
               }
-              className="mt-2 w-full resize-none rounded-sm border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-faint focus:border-charcoal focus:outline-none focus:ring-1 focus:ring-charcoal"
+              className={`${fieldClass(!!errors.description)} resize-none`}
             />
             {errors.description && (
               <p id="enq-description-err" role="alert" className="mt-2 text-sm text-[#a33]">
@@ -230,7 +239,7 @@ export default function WhatsAppEnquiry() {
           <button
             type="button"
             onClick={onContinue}
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-ink px-6 py-4 text-base font-semibold text-warm transition-colors hover:bg-charcoal"
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#25D366] px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
           >
             Continue to WhatsApp
             <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

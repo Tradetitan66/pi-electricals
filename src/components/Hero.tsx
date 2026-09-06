@@ -12,8 +12,8 @@ export default function Hero() {
     <section id="home" className="relative isolate overflow-hidden bg-ink text-warm">
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/PI 22.jpg"
-          alt="PI Electrical completed lighting and electrical installation in a premium residential project"
+          src="/images/HERO PAGE.png"
+          alt="PI Electrical hero image"
           fill
           priority
           sizes="100vw"

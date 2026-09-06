@@ -17,7 +17,7 @@ function Stars({ rating }: { rating: number }) {
       {Array.from({ length: rating }).map((_, i) => (
         <Star
           key={i}
-          className="h-4 w-4 fill-charcoal text-charcoal"
+          className="h-4 w-4 fill-amber-400 text-amber-400"
           aria-hidden="true"
         />
       ))}
@@ -61,12 +61,9 @@ function Expandable({
 }
 
 export default function Reviews() {
-  const featured = REVIEWS.find((r) => r.featured) ?? REVIEWS[0];
-  const others = REVIEWS.filter((r) => r !== featured);
-
   return (
     <section id="reviews" className="border-b border-line bg-warm">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-[0.78rem] font-semibold uppercase tracking-[0.2em] text-muted">
@@ -82,32 +79,8 @@ export default function Reviews() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 sm:gap-5 lg:grid-cols-3">
-          {/* Featured large review */}
-          <Reveal className="lg:row-span-2">
-            <figure className="flex h-full flex-col rounded-[2px] bg-ivory p-7 ring-1 ring-black/5 sm:p-9">
-              <Stars rating={featured.rating} />
-              <div className="mt-5 flex-1">
-                <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-muted">
-                  {featured.job}
-                </p>
-                <div className="mt-4">
-                  <Expandable review={featured} previewLength={160} />
-                </div>
-              </div>
-              <figcaption className="mt-6 border-t border-line pt-5">
-                <p className="font-semibold text-ink">{featured.reviewer}</p>
-                <p className="mt-1 text-sm text-muted">
-                  {featured.location}
-                  <span aria-hidden="true"> · </span>
-                  <span className="text-faint">{featured.date}</span>
-                </p>
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          {/* Smaller reviews */}
-          {others.slice(0, 5).map((review, i) => (
+        <div className="mt-10 grid gap-4 sm:gap-5 lg:grid-cols-3">
+          {REVIEWS.map((review, i) => (
             <Reveal key={review.reviewer + review.date} delay={(i % 3) * 60}>
               <figure className="flex h-full flex-col rounded-[2px] bg-ivory p-6 ring-1 ring-black/5 sm:p-7">
                 <Stars rating={review.rating} />

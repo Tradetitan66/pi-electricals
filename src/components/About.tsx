@@ -1,71 +1,103 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { useEnquiry } from "@/components/EnquiryProvider";
 
+const SLIDES = [
+  {
+    src: "/images/PI TEAM 2.jpg",
+    alt: "PI Electrical local team",
+  },
+  {
+    src: "/images/PI TEAM VAN.png",
+    alt: "PI Electrical team van",
+  },
+] as const;
+
+const ROTATE_MS = 5000;
+
+function useRotatingIndex(length: number) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % length);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
+  }, [length]);
+
+  return index;
+}
+
 export default function About() {
   const { openEnquiry } = useEnquiry();
+  const index = useRotatingIndex(SLIDES.length);
+  const slide = SLIDES[index];
 
   return (
     <section id="about" className="border-b border-line bg-warm">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
         <div className="grid items-start gap-10 lg:grid-cols-[1.1fr,1fr] lg:gap-16">
           <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-stone sm:aspect-[3/2] lg:aspect-[4/5]">
-              <Image
-                src="/images/PI TEAM 1.jpg"
-                alt="PI Electrical team member at work on a professional installation"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-                loading="lazy"
-              />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-stone">
+              <div
+                className="flex h-full w-full flex-col transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateY(-${index * 100}%)` }}
+              >
+                {SLIDES.map((s, i) => (
+                  <div
+                    key={s.src}
+                    className="relative h-full w-full flex-shrink-0"
+                    aria-hidden={i !== index}
+                  >
+                    <Image
+                      src={s.src}
+                      alt={s.alt}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="sr-only">{slide.alt}</p>
+              <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-1.5">
+                {SLIDES.map((s, i) => (
+                  <span
+                    key={s.src}
+                    aria-hidden="true"
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === index ? "w-5 bg-warm" : "w-1.5 bg-warm/50"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </Reveal>
 
           <Reveal delay={80}>
             <div className="lg:sticky lg:top-28">
               <p className="text-[0.78rem] font-semibold uppercase tracking-[0.2em] text-muted">
-                About PI Electrical
+                Local &amp; established
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                Professional work.
+                Local team.
                 <br />
-                Personal service.
+                Professional service.
               </h2>
               <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:text-lg">
-                PI Electrical is a local electrical company focused on
-                professional workmanship, clear communication and a finish we&rsquo;re
-                proud to put our name to.
+                Based in Bonnyrigg and serving customers across Edinburgh,
+                Midlothian and surrounding areas.
               </p>
               <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:text-lg">
-                From smaller electrical jobs to larger property projects, the aim
-                is to make the process straightforward — from the first message
-                through to completion.
+                A real, local team you can rely on — approachable, professional
+                and proud of the work they put their name to.
               </p>
-
-              <div className="mt-8 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
-                <div>
-                  <p className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                    Quality first
-                  </p>
-                  <p className="mt-2 max-w-xs text-[0.95rem] leading-relaxed text-charcoal/70">
-                    We take care to do the job properly and leave it clean and
-                    tidy.
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                    Clear and easy
-                  </p>
-                  <p className="mt-2 max-w-xs text-[0.95rem] leading-relaxed text-charcoal/70">
-                    Straightforward communication and fair pricing, from the
-                    first call to the final handover.
-                  </p>
-                </div>
-              </div>
 
               <button
                 type="button"

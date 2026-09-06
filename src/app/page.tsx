@@ -4,7 +4,6 @@ import Projects from "@/components/Projects";
 import Services from "@/components/Services";
 import FeaturedProject from "@/components/FeaturedProject";
 import About from "@/components/About";
-import Vehicle from "@/components/Vehicle";
 import Reviews from "@/components/Reviews";
 import ContactCTA from "@/components/ContactCTA";
 
@@ -17,7 +16,6 @@ export default function Home() {
       <Services />
       <FeaturedProject />
       <About />
-      <Vehicle />
       <Reviews />
       <ContactCTA />
     </>

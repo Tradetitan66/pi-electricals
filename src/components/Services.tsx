@@ -20,17 +20,17 @@ export default function Services() {
           </div>
         </Reveal>
 
-        <div className="mt-12 border-t border-line">
+        <div className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => (
             <Reveal key={service.number} delay={(i % 3) * 50}>
-              <div className="group grid grid-cols-[auto,1fr] items-baseline gap-x-5 gap-y-1 border-b border-line py-8 transition-colors sm:grid-cols-[4rem,minmax(0,14rem),1fr] sm:gap-x-8 sm:py-10">
-                <span className="text-sm tabular-nums text-faint sm:mt-1">
+              <div className="border-t border-line pt-8">
+                <span className="text-sm font-bold tabular-nums text-faint">
                   {service.number}
                 </span>
-                <h3 className="text-xl font-semibold tracking-tight text-ink sm:text-3xl">
+                <h3 className="mt-3 text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                   {service.title}
                 </h3>
-                <p className="col-span-2 mt-2 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:col-span-1 sm:col-start-3 sm:mt-0 sm:max-w-none sm:text-base">
+                <p className="mt-2 max-w-sm text-[0.95rem] leading-relaxed text-muted">
                   {service.text}
                 </p>
               </div>

@@ -20,8 +20,8 @@ export const BUSINESS = {
   phoneDisplay: "07445 846762",
   phoneHref: "tel:07445846762",
   // TODO: Replace with the real email address once confirmed.
-  emailDisplay: "hello@pielectrical.example.com",
-  emailHref: "mailto:hello@pielectrical.example.com",
+  emailDisplay: "Paulinnes2306@hotmail.com",
+  emailHref: "mailto:Paulinnes2306@hotmail.com",
   // WhatsApp number: UK mobile, international format with leading 0 dropped.
   // 07445 846762 -> 447445846762
   whatsappNumber: "447445846762",

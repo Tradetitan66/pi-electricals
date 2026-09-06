@@ -21,7 +21,7 @@ export default function TrustStrip() {
         <div className="mt-10 grid gap-8 border-t border-line pt-10 sm:grid-cols-3 sm:gap-10">
           {VALUES.map((value) => (
             <div key={value.title}>
-              <p className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-muted">
+              <p className="text-[0.78rem] font-bold uppercase tracking-[0.18em] text-muted">
                 {value.title}
               </p>
               <p className="mt-2 max-w-xs text-[0.95rem] leading-relaxed text-charcoal/70">
