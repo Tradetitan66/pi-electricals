@@ -90,24 +90,6 @@ export default function Header() {
 
           {/* Mobile actions */}
           <div className="flex items-center gap-2 lg:hidden">
-            <a
-              href={BUSINESS.phoneHref}
-              aria-label={`Call PI Electrical on ${BUSINESS.phoneDisplay}`}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-sm text-ink transition-all duration-300 hover:bg-stone ${
-                scrolled ? "pointer-events-none w-0 scale-90 opacity-0" : "opacity-100"
-              }`}
-            >
-              <Phone className="h-5 w-5" aria-hidden="true" />
-            </a>
-            <button
-              type="button"
-              onClick={openEnquiry}
-              className={`rounded-sm bg-ink px-4 py-2.5 text-sm font-semibold text-warm transition-all duration-300 hover:bg-charcoal ${
-                scrolled ? "pointer-events-none scale-90 opacity-0" : "opacity-100"
-              }`}
-            >
-              Get a quote
-            </button>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
