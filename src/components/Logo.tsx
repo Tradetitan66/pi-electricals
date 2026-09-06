@@ -5,6 +5,7 @@ type LogoProps = {
   imgClassName?: string;
   priority?: boolean;
   rounded?: boolean;
+  src?: string;
 };
 
 export default function Logo({
@@ -12,13 +13,14 @@ export default function Logo({
   imgClassName = "",
   priority = false,
   rounded = false,
+  src = "/images/PI LOGO.png",
 }: LogoProps) {
   return (
     <span
       className={`inline-flex ${rounded ? "rounded-full overflow-hidden bg-stone" : ""} ${className}`}
     >
       <Image
-        src="/images/PI LOGO.png"
+        src={src}
         alt="PI Electrical logo"
         width={120}
         height={60}

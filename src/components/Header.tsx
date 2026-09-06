@@ -53,7 +53,17 @@ export default function Header() {
             aria-label="PI Electrical — home"
             onClick={() => setOpen(false)}
           >
-            <Logo imgClassName="h-10 w-auto lg:h-11" />
+            <span className="flex items-center gap-2.5">
+              <Logo
+                rounded
+                priority
+                src="/images/PI MARK.png"
+                imgClassName="h-10 w-10 rounded-full object-cover lg:h-11 lg:w-11"
+              />
+              <span className="text-lg font-semibold tracking-tight text-ink lg:text-xl">
+                PI Electricals
+              </span>
+            </span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
@@ -83,14 +93,18 @@ export default function Header() {
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call PI Electrical on ${BUSINESS.phoneDisplay}`}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-ink transition-colors hover:bg-stone"
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-sm text-ink transition-all duration-300 hover:bg-stone ${
+                scrolled ? "pointer-events-none w-0 scale-90 opacity-0" : "opacity-100"
+              }`}
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
             </a>
             <button
               type="button"
               onClick={openEnquiry}
-              className="rounded-sm bg-ink px-4 py-2.5 text-sm font-semibold text-warm transition-colors hover:bg-charcoal"
+              className={`rounded-sm bg-ink px-4 py-2.5 text-sm font-semibold text-warm transition-all duration-300 hover:bg-charcoal ${
+                scrolled ? "pointer-events-none scale-90 opacity-0" : "opacity-100"
+              }`}
             >
               Get a quote
             </button>

@@ -43,7 +43,7 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
         <div className="grid items-start gap-10 lg:grid-cols-[1.1fr,1fr] lg:gap-16">
           <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-stone">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-stone">
               <div
                 className="flex h-full w-full flex-col transition-transform duration-700 ease-in-out"
                 style={{ transform: `translateY(-${index * 100}%)` }}

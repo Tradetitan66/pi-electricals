@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Star } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { REVIEWS } from "@/lib/constants";
 
@@ -61,6 +61,32 @@ function Expandable({
 }
 
 export default function Reviews() {
+  const [paused, setPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scrollByCard = useCallback((dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-review-card]");
+    const width = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollTo({ left: el.scrollLeft + dir * width, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollTo({ left: el.scrollLeft + el.clientWidth * 0.9, behavior: "smooth" });
+      }
+    }, 3500);
+    return () => clearInterval(id);
+  }, [paused]);
+
   return (
     <section id="reviews" className="border-b border-line bg-warm">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -79,30 +105,64 @@ export default function Reviews() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:gap-5 lg:grid-cols-3">
-          {REVIEWS.map((review, i) => (
-            <Reveal key={review.reviewer + review.date} delay={(i % 3) * 60}>
-              <figure className="flex h-full flex-col rounded-[2px] bg-ivory p-6 ring-1 ring-black/5 sm:p-7">
-                <Stars rating={review.rating} />
-                <div className="mt-4 flex-1">
-                  <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-muted">
-                    {review.job}
-                  </p>
-                  <div className="mt-3">
-                    <Expandable review={review} previewLength={110} />
+        <div
+          className="group/carousel relative mt-10 sm:mt-14"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {REVIEWS.map((review, i) => (
+              <Reveal
+                key={review.reviewer + review.date}
+                as="figure"
+                className="w-[82vw] max-w-md shrink-0 snap-start sm:w-[46vw] sm:max-w-lg lg:w-[calc((100%-2rem)/3)]"
+                delay={(i % 3) * 60}
+              >
+                <div
+                  data-review-card
+                  className="flex h-full flex-col rounded-3xl bg-ivory p-6 ring-1 ring-black/5 sm:p-7"
+                >
+                  <Stars rating={review.rating} />
+                  <div className="mt-4 flex-1">
+                    <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                      {review.job}
+                    </p>
+                    <div className="mt-3">
+                      <Expandable review={review} previewLength={110} />
+                    </div>
                   </div>
+                  <figcaption className="mt-5 border-t border-line pt-4">
+                    <p className="font-semibold text-ink">{review.reviewer}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      {review.location}
+                      <span aria-hidden="true"> · </span>
+                      <span className="text-faint">{review.date}</span>
+                    </p>
+                  </figcaption>
                 </div>
-                <figcaption className="mt-5 border-t border-line pt-4">
-                  <p className="font-semibold text-ink">{review.reviewer}</p>
-                  <p className="mt-1 text-sm text-muted">
-                    {review.location}
-                    <span aria-hidden="true"> · </span>
-                    <span className="text-faint">{review.date}</span>
-                  </p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            className="absolute left-0 top-[40%] z-10 hidden h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-warm text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-white lg:inline-flex"
+            aria-label="Previous reviews"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            className="absolute right-0 top-[40%] z-10 hidden h-12 w-12 translate-x-1/2 items-center justify-center rounded-full bg-warm text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-white lg:inline-flex"
+            aria-label="Next reviews"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
         </div>
       </div>
     </section>
