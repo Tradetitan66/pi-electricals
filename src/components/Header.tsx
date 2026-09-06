@@ -61,7 +61,7 @@ export default function Header() {
                 imgClassName="h-10 w-10 rounded-full object-cover lg:h-11 lg:w-11"
               />
               <span className="text-lg font-semibold tracking-tight text-ink lg:text-xl">
-                PI Electricals
+                PI Electrical
               </span>
             </span>
           </Link>
