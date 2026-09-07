@@ -36,7 +36,7 @@ export default function Hero() {
 
         <p className="mt-5 max-w-xl text-base leading-relaxed text-warm/80 sm:text-lg">
           Professional electrical services across Bonnyrigg, Edinburgh, Midlothian
-          and surrounding areas — delivered with care from first conversation to
+          and surrounding areas - delivered with care from first conversation to
           final finish.
         </p>
 

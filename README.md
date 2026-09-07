@@ -1,4 +1,4 @@
-# PI Electrical — Demo Website
+# PI Electrical - Demo Website
 
 A premium, production-quality one-page marketing website for **PI Electrical**, a real electrical contractor in Bonnyrigg, Scotland.
 
@@ -31,33 +31,33 @@ src/lib/constants.ts  ALL site content + contact details (edit here)
 
 ### Components
 
-- `Header` — sticky header, desktop nav, mobile menu, Get a quote CTA
-- `Hero` — full-bleed project photo, headline, primary/secondary CTAs
-- `TrustStrip` — "On time. Tidy. Done properly." value strip
-- `Projects` — editorial gallery with lightbox (portfolio photography)
-- `Services` — sophisticated numbered service list
-- `FeaturedProject` — full-width feature project section
-- `About` — team photo + business introduction
-- `Vehicle` — local presence / company vehicle
-- `Reviews` — featured review + smaller expandable review cards
-- `ContactCTA` — closing call-to-action
-- `Footer` — minimal footer with address, contact, nav
-- `WhatsAppEnquiry` — pre-WhatsApp enquiry form (bottom-sheet / modal)
-- `MobileContactBar` — sticky mobile Call / WhatsApp bar
-- `Logo`, `Reveal`, `EnquiryProvider` — shared helpers
-- `EnquiryProvider` — React context that opens the enquiry from anywhere
+- `Header` - sticky header, desktop nav, mobile menu, Get a quote CTA
+- `Hero` - full-bleed project photo, headline, primary/secondary CTAs
+- `TrustStrip` - "On time. Tidy. Done properly." value strip
+- `Projects` - editorial gallery with lightbox (portfolio photography)
+- `Services` - sophisticated numbered service list
+- `FeaturedProject` - full-width feature project section
+- `About` - team photo + business introduction
+- `Vehicle` - local presence / company vehicle
+- `Reviews` - featured review + smaller expandable review cards
+- `ContactCTA` - closing call-to-action
+- `Footer` - minimal footer with address, contact, nav
+- `WhatsAppEnquiry` - pre-WhatsApp enquiry form (bottom-sheet / modal)
+- `MobileContactBar` - sticky mobile Call / WhatsApp bar
+- `Logo`, `Reveal`, `EnquiryProvider` - shared helpers
+- `EnquiryProvider` - React context that opens the enquiry from anywhere
 
-## Before going live — TODO: replace placeholders
+## Before going live - TODO: replace placeholders
 
 Search the codebase for `TODO:` to find every value that needs confirming.
 All are also gathered in one place: `src/lib/constants.ts`.
 
 The following are **placeholder values and must not be considered real**:
 
-- **Phone number** — `BUSINESS.phoneDisplay` / `phoneHref`
-- **Email address** — `BUSINESS.emailDisplay` / `emailHref`
-- **WhatsApp number** — `BUSINESS.whatsappNumber` (used to build `wa.me` links)
-- **Site URL** — `metadataBase` in `src/app/layout.tsx` and the JSON-LD `url`/`logo`
+- **Phone number** - `BUSINESS.phoneDisplay` / `phoneHref`
+- **Email address** - `BUSINESS.emailDisplay` / `emailHref`
+- **WhatsApp number** - `BUSINESS.whatsappNumber` (used to build `wa.me` links)
+- **Site URL** - `metadataBase` in `src/app/layout.tsx` and the JSON-LD `url`/`logo`
 
 The WhatsApp number must be the number *only* (no `+`, spaces, brackets or hyphens),
 e.g. `+44 7123 456789` becomes `447123456789`.
@@ -71,7 +71,7 @@ details were not supplied. Fill these in as real information becomes available.
 - **Mobile-first**: the mobile experience (375px → 430px) is the priority; the desktop
   layout is a deliberate recomposition, not a shrunken version.
 - **Quiet-premium positioning**: restrained warm-white / ivory / stone / charcoal
-  palette, editorial spacing and typography, real project photography — no electrician
+  palette, editorial spacing and typography, real project photography - no electrician
   stock imagery, no glowing gradients, no template look.
 - **Contact-first**: Call and WhatsApp appear in the header, hero, project and closing
   sections, plus a sticky mobile bar. WhatsApp flows open a short pre-enquiry form that
@@ -82,4 +82,4 @@ details were not supplied. Fill these in as real information becomes available.
 - Semantic HTML, single `H1`, logical `H2`/`H3` hierarchy, visible focus states,
   labelled forms with inline errors, descriptive alt text, large touch targets.
 - `next/image` for AVIF/WebP, responsive sizes, lazy loading below the fold and
-  priority only on the hero. No animation libraries — lightweight CSS reveals.
+  priority only on the hero. No animation libraries - lightweight CSS reveals.

@@ -27,7 +27,7 @@ export default function Header() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      {/* Top contact micro-bar — desktop only */}
+      {/* Top contact micro-bar - desktop only */}
       <div
         className={`hidden overflow-hidden border-b border-line transition-all duration-300 lg:block ${
           scrolled ? "max-h-0 border-transparent opacity-0" : "max-h-12 opacity-100"
@@ -50,7 +50,7 @@ export default function Header() {
           <Link
             href="/#home"
             className="shrink-0"
-            aria-label="PI Electrical — home"
+            aria-label="PI Electrical - home"
             onClick={() => setOpen(false)}
           >
             <span className="flex items-center gap-2.5">

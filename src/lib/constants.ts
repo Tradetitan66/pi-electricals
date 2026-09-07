@@ -1,5 +1,5 @@
 // ============================================================================
-// PI ELECTRICAL — SITE CONTENT
+// PI ELECTRICAL - SITE CONTENT
 // ----------------------------------------------------------------------------
 // All site content lives here so the client can edit it in one place.
 //
@@ -150,7 +150,7 @@ export const SERVICES = [
   {
     number: "02",
     title: "Lighting",
-    text: "Downlights, spotlights, soffit lighting and decorative fixtures — carefully installed and finished.",
+    text: "Downlights, spotlights, soffit lighting and decorative fixtures - carefully installed and finished.",
   },
   {
     number: "03",

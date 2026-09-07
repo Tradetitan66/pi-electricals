@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2">
-            <Link href="/#home" aria-label="PI Electrical — home">
+            <Link href="/#home" aria-label="PI Electrical - home">
               <span className="inline-block rounded-sm bg-warm p-2">
                 <Logo imgClassName="h-9 w-auto" />
               </span>

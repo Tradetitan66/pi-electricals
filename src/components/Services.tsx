@@ -41,7 +41,7 @@ export default function Services() {
         <Reveal className="mt-10">
           <p className="max-w-2xl text-[0.95rem] leading-relaxed text-muted">
             Every project is quoted in advance, with clear communication
-            throughout. If you&rsquo;re unsure whether we cover your job, just ask —
+            throughout. If you&rsquo;re unsure whether we cover your job, just ask -
             we&rsquo;ll be straight with you.
           </p>
         </Reveal>

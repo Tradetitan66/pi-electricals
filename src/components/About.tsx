@@ -95,7 +95,7 @@ export default function About() {
                 Midlothian and surrounding areas.
               </p>
               <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:text-lg">
-                A real, local team you can rely on — approachable, professional
+                A real, local team you can rely on - approachable, professional
                 and proud of the work they put their name to.
               </p>
 

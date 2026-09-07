@@ -15,7 +15,7 @@ export default function FeaturedProject() {
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/PI 25.jpg"
-          alt="Featured PI Electrical project — a carefully finished lighting installation"
+          alt="Featured PI Electrical project - a carefully finished lighting installation"
           fill
           sizes="100vw"
           className="object-cover object-center"
