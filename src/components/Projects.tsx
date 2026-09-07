@@ -15,10 +15,30 @@ export default function Projects() {
   const { openEnquiry } = useEnquiry();
   const trackRef = useRef<HTMLDivElement>(null);
 
+  const openLightbox = useCallback((p: Project) => setSelected(p), []);
+
+  const goNext = useCallback(() => {
+    setSelected((cur) => {
+      if (!cur) return cur;
+      const i = PROJECTS.findIndex((p) => p.image === cur.image);
+      return PROJECTS[(i + 1) % PROJECTS.length];
+    });
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setSelected((cur) => {
+      if (!cur) return cur;
+      const i = PROJECTS.findIndex((p) => p.image === cur.image);
+      return PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length];
+    });
+  }, []);
+
   useEffect(() => {
     if (!selected) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setSelected(null);
+      else if (e.key === "ArrowRight") goNext();
+      else if (e.key === "ArrowLeft") goPrev();
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -26,9 +46,7 @@ export default function Projects() {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [selected]);
-
-  const openLightbox = useCallback((p: Project) => setSelected(p), []);
+  }, [selected, goNext, goPrev]);
 
   const scrollByCard = useCallback((dir: 1 | -1) => {
     const el = trackRef.current;
@@ -105,7 +123,7 @@ export default function Projects() {
                     />
                     <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10" />
                   </div>
-                  <figcaption className="flex items-center justify-between gap-3 px-1 pb-1 pt-4">
+                  <figcaption className="flex items-center justify-between gap-3 px-5 pb-5 pt-4">
                     <span className="text-[0.85rem] font-medium tracking-wide text-charcoal">
                       {project.label}
                     </span>
@@ -171,6 +189,28 @@ export default function Projects() {
           >
             <X className="h-6 w-6" />
           </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goPrev();
+            }}
+            className="absolute left-2 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm/10 text-warm transition-colors hover:bg-warm/25 sm:left-5"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goNext();
+            }}
+            className="absolute right-2 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-warm/10 text-warm transition-colors hover:bg-warm/25 sm:right-5"
+            aria-label="Next image"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
           <figure
             className="relative max-h-[86vh] w-full max-w-3xl"
             onClick={(e) => e.stopPropagation()}
@@ -184,8 +224,13 @@ export default function Projects() {
                 className="object-contain"
               />
             </div>
-            <figcaption className="mt-3 text-sm text-warm/70">
-              {selected.label}
+            <figcaption className="mt-3 flex items-baseline justify-between gap-3 text-sm text-warm/70">
+              <span>
+                {selected.label}
+              </span>
+              <span aria-hidden="true" className="tabular-nums text-warm/50">
+                {PROJECTS.findIndex((p) => p.image === selected.image) + 1} / {PROJECTS.length}
+              </span>
             </figcaption>
           </figure>
         </div>

@@ -20,10 +20,10 @@ export default function Services() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => (
             <Reveal key={service.number} delay={(i % 3) * 50}>
-              <div className="border-t border-line pt-8">
+              <div className="flex h-full flex-col rounded-3xl border border-line bg-ivory p-6 transition duration-300 hover:-translate-y-1 hover:border-stone hover:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.18)] sm:p-8">
                 <span className="text-sm font-bold tabular-nums text-faint">
                   {service.number}
                 </span>
